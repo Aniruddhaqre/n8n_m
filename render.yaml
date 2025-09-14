@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: n8n
+    env: docker
+    plan: free
+    envVars:
+      - key: GENERIC_TIMEZONE
+        value: Asia/Kolkata
+
+      # Basic auth (secure access)
+      - key: N8N_BASIC_AUTH_ACTIVE
+        value: "true"
+      - key: N8N_BASIC_AUTH_USER
+        value: yourusername   # 👈 change this
+      - key: N8N_BASIC_AUTH_PASSWORD
+        sync: false           # 👈 set password manually in Render dashboard
+
+      # Neon DB config (persistent storage)
+      - key: DB_TYPE
+        value: postgresdb
+      - key: DB_POSTGRESDB_HOST
+        value: ep-falling-truth-a118o8q7-pooler.ap-southeast-1.aws.neon.tech
+      - key: DB_POSTGRESDB_PORT
+        value: "5432"
+      - key: DB_POSTGRESDB_DATABASE
+        value: neondb
+      - key: DB_POSTGRESDB_USER
+        value: neondb_owner
+      - key: DB_POSTGRESDB_PASSWORD
+        sync: false           # 👈 set manually in Render dashboard
+      - key: DB_POSTGRESDB_SSL_CA
+        value: "true"
